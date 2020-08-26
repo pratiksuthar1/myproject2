@@ -1,0 +1,75 @@
+{% extends 'myapp/header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		td{
+			padding: 5px;
+		}
+	</style>
+	
+</head>
+<body>
+	<center>
+<h3>
+	 {% if msg %}
+	  {{msg}}
+	{% endif %}
+</h3>
+</center>
+<center><h1>Sign Up</h1>
+<form name="signup" method="post" action="{% url 'signup' %}" enctype="multipart/form-data">
+	{% csrf_token %}
+	<table>
+		<tr>
+			<td><input type="radio" name="usertype" value="user">	User</td>
+			<td><input type="radio" name="usertype" value="seller">	seller</td>
+		<tr>
+			<td>First Name</td>
+			<td><input type="text" name="fname" value="{{user.fname}}"></td>
+		</tr>
+
+		<tr>
+			<td>Last Name</td>
+			<td><input type="text" name="lname" value="{{user.lname}}"></td>
+		</tr>
+		<tr>
+			<td>E-mail</td>
+			<td><input type="text" name="email" value="{{user.email}}"></td>
+		</tr>
+
+		<tr>
+			<td>mobile</td>
+			<td><input type="text" name="mobile" value="{{user.mobile}}"></td>
+		</tr>
+
+		<tr>
+			<td>Password</td>
+			<td><input type="password" name="password"></td>
+		</tr>
+
+		<tr>
+			<td>Confirm Password</td>
+			<td><input type="password" name="cpassword"></td>
+		</tr>
+		<tr>
+			<td>User Image</td>
+			<td><input type="file" name="user_image"></td>
+		</tr>
+
+		<tr>
+			<td colspan="2" align="center">
+				<input type="submit" name="signup">
+			</td>
+	
+		</tr>
+</table>
+</form>
+</center>
+
+{% endblock %}
+
+</body>
+</html>

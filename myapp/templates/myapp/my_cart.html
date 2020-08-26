@@ -1,0 +1,81 @@
+{% extends 'myapp/header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		button {
+  background-color: purple; /* Green */
+  border: none;
+  color: white;
+  padding: 6px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+button {border-radius: 8px;}
+
+
+
+		td{
+			padding: 5px;
+		}
+		body{
+			background-image: url('{% static "myapp/1.jpg" %}');
+			background-repeat: no-repeat;
+			background-size: 100%;
+			}
+	</style>
+	<center>
+	<h3>
+	 {% if msg %}
+	  {{msg}}
+	{% endif %}
+</h3>
+</center>
+	
+</head>
+<body>
+	<div class="row">
+		{% for m in mycart %}
+	<div id="box" class="col-sm-3">
+			<div class="container">
+		  		<div class="card" style="width:250px">
+		    		<img class="card-img-top" src="{{m.book.book_image.url}}" alt="Card image" width=250px height=250px>
+		    			<div class="card-body">
+		    				<center>
+		      				<h6 class="card-title">Book Name:{{m.book.book_name}}</h6>
+		      				<p class="card-text">Book Price:{{m.book.book_price}}</p>
+		      				<p class="card-text">Book Author:{{m.book.book_author}}</p>
+		      
+		      				<a href="{% url 'remove_cart' pk=m.pk %}"><button>Remove</button></a><br>
+		      				<a href="{% url 'move_to_wishlist' pk=m.pk %}"><button>Move to Wishlist</button></a><br>
+		      				<a href="">Buy Now</a><br>
+		      			</center>
+
+
+		  	  			</div> 
+		  		</div>	  
+			</div>
+		</div>
+		
+{% endfor %}
+</div>
+<form name="pay" method="POST" action="{% url 'pay' %}">
+	{% csrf_token %}
+	<input type="lable" name="amount" value="{{total_price}}" readonly="readonly">
+	<input type="submit" name="submit" value="Buy">
+
+</form>
+	
+	
+{% endblock %}
+
+</body>
+</html>

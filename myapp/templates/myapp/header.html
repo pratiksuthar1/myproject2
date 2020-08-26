@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+  <style type="text/css">
+  img {
+  border-radius:10%;
+}
+
+  </style>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<body> 
+	
+  <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href=""><span class="glyphicon glyphicon-book"></span>E-Book</a>
+    </div>
+    <ul class="nav navbar-nav">
+    <li class="active"><a href="{% url 'index' %}"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Book Catagory <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'python' %}">python</a></li>
+           <li><a href="{% url 'java' %}">Java</a></li>
+            <li><a href="{% url 'php' %}">PHP</a></li>
+          </ul>
+    </li>
+    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+    </ul>
+    <ul class="nav navbar-nav">
+  </ul>
+  <form class="navbar-form navbar-left" method="post" action="{% url 'search_book' %}">
+    {% csrf_token %}
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Search" name="search">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+  {% if request.session.fname %}
+  <ul class="nav navbar-nav navbar-right">
+  <li><a href="{% url 'wishlist' %}">
+    <span class="glyphicon glyphicon-heart"></span></a></li>
+
+
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="{% url 'my_cart' %}">
+    <span class="glyphicon glyphicon-shopping-cart"></span>Cart({{request.session.cartcount}})</a></li>
+  
+      <li><a href="{% url 'change_password' %}">
+        <span class="glyphicon glyphicon-edit"></span>Change Password</a></li>
+        <li><u></u><img src="{{request.session.user_image}}"  class="img-circle" width="50px" height="50px"></li></u>
+        <li><a href="{% url 'profile' %}"><span class="glyphicon glyphicon-edit"></span>Profile</a></li>
+        <li><a href="{% url 'logout' %}">{{ request.session.fname }}
+        <span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+    </ul>
+ 
+  {% else %}
+     <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="{%url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  
+  {% endif %}
+  </div>
+</nav>
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>

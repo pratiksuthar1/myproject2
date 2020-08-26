@@ -1,0 +1,69 @@
+{% extends 'myapp/seller_header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css" >
+				button {
+  background-color: purple; /* Green */
+  border: none;
+  color: white;
+  padding: 6px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+button {border-radius: 8px;}
+
+
+		td{
+			padding: 5px;
+		}
+		body{
+			background-color: rgba(201, 76, 76, 0.3);
+
+
+		}
+	</style>
+	
+</head>
+<body>
+
+	<center>
+<h3>
+	 {% if not books %}
+	  <h3>No books Added</h3>
+	{% endif %}
+</h3>
+</center>
+	<div class="row">
+		{% for b in books %}
+	<div id="box" class="col-sm-3">
+			<div class="container">
+		  		<div class="card" style="width:250px">
+		    		<img class="card-img-top" src="{{b.book_image.url}}" alt="Card image" width=250px height=250px>
+		    			<div class="card-body">
+		      				<h6 class="card-title">Book Name:{{b.book_name}}</h4>
+		      				<p class="card-text">Book Price:{{b.book_price}}</p>
+		      				<a href="{% url 'book_detail' pk=b.pk %}"><button>More Detail</button></a>
+		      				<br>
+		      				
+		    			</div>
+		  		</div>	  
+			</div>
+		</div>
+		{% endfor %}
+		
+
+	</div>
+
+	
+{% endblock %}
+
+</body>
+</html>

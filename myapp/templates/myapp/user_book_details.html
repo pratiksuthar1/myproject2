@@ -1,0 +1,64 @@
+ {% extends 'myapp/header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+				button {
+  background-color: purple; /* Green */
+  border: none;
+  color: white;
+  padding: 6px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+button {border-radius: 8px;}
+
+
+		td{
+			padding: 5px;
+		}
+		body{
+			background-color: #fefbd8;
+
+		}
+	</style>
+	
+</head>
+<body>
+	<div class="row">
+
+	<div id="box" class="col-sm-3">
+			<div class="container">
+		  		<div class="card" style="width:250px">
+				<img class="card-img-top" src="{{books.book_image.url}}" alt="Card image" width=250px height=250px>
+		    			<div class="card-body">
+		      				<h6 class="card-title">Book Name:{{books.book_name}}</h4>
+		      				<p class="card-text">Book Price:{{books.book_price}}</p>
+		      				<p class="card-text">Book Author:{{books.book_author}}</p>
+		      				
+		      				{% if request.session.fname %}
+		      				<a href="{% url 'add_to_cart' pk=books.pk %}"><button>Add to Cart</button></a><br>
+							<a href="{% url 'add_to_wishlist' pk=books.pk %}"><button>Add to wish List</button></a>		      				
+		      				{% else %}
+		      				<a href="{% url 'login' %}"><button>Login to Buy</button></a>
+		      				{% endif %}
+		  	  			</div> 
+		  		</div>	  
+			</div>
+		</div>
+		
+
+	</div>
+
+	
+{% endblock %}
+
+</body>
+</html>

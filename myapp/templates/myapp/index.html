@@ -1,0 +1,23 @@
+{% extends 'myapp/header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	body{
+			background-image: url('{% static "myapp/libreary.jpg" %}');
+			background-repeat: no-repeat;
+			background-size: 100%;
+
+		}
+	</style>
+</head>
+<body>
+
+<h1>Index Page</h1>  
+{% endblock %}
+
+</body>
+</html>
